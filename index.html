@@ -138,6 +138,41 @@
             flex-grow: 1;
         }
 
+        .card-points {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+            margin-bottom: 22px;
+            flex-grow: 1;
+        }
+
+        .card-points li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 15px;
+            line-height: 1.45;
+            color: #374151;
+            font-weight: 500;
+        }
+
+        .card-points li::before {
+            content: "✓";
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            margin-top: 1px;
+            border-radius: 6px;
+            background: var(--primary-light);
+            color: var(--primary-blue);
+            font-size: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         .card-footer {
             font-size: 14px;
             font-weight: 600;
@@ -352,6 +387,14 @@
                 stage: "1-BOSQICH · FUNDAMENTAL VA DASTURLASH ASOSLARI",
                 monthTitle: "1-oy · SI asoslari, amaliy va nazariy darslar",
                 description: "SI turlari, Prompt yozish, Google AI Studio, Bolt, Antigravity hamda Web dasturlash (HTML, CSS, Tailwind, JS, TS, Git) asoslari.",
+                points: [
+                    "SI nima?",
+                    "SI yo'nalishlari",
+                    "Asosiy SI texnologiyalari",
+                    "SI bilan sayt qurish",
+                    "Loyihalarni boshqarish",
+                    "Oylik imtihon"
+                ],
                 topics: [
                     "SI nima?",
                     "SI yo'nalishlari",
@@ -390,6 +433,12 @@
                 stage: "2-BOSQICH · AMALIY LOYIHALAR",
                 monthTitle: "2-oy · SI bilan loyihalar qurish",
                 description: "Telegram bot, Landing page, Portfolio sayt yaratish, serverlar va ma'lumotlar bazasi (Supabase, Firebase) bilan ishlash.",
+                points: [
+                    "Telegramda ishlaydigan yordamchi yasash",
+                    "Mahsulot sotadigan sayt qurish",
+                    "O'zingiz haqingizdagi sayt qurish",
+                    "Mijoz ma'lumotlarini saqlashni o'rganish"
+                ],
                 topics: [
                     "SI bilan Telegram bot qurish",
                     "SI bilan Landing page - Sotuv saytini qurish",
@@ -405,6 +454,12 @@
                 stage: "3-BOSQICH · INTEGRATSIYA VA WEB LOYIHALAR",
                 monthTitle: "3-oy · SI bilan chuqurlashtirilgan loyihalar",
                 description: "Bulutli va jamoaviy vositalar, amoCRM integratsiyasi, korporativ saytlar, QR skaner, poyga o'yini va shaxsiy repititor loyihasi.",
+                points: [
+                    "Ish hujjatlarini onlayn boshqarish",
+                    "Mijozlar bilan ishlash tizimini ulash",
+                    "Kompaniya uchun sayt qurish",
+                    "O'yin va QR o'qiydigan dastur yasash"
+                ],
                 topics: [
                     "SI skillari bilan ishlash",
                     "Bulutli va Team bo'lib ishlash uchun kerakli loyihalar bilan ishlash (Google Drive, Google Sheets, Jira, Notion, Obsidian, Trello, Calendar bilan ishlash)",
@@ -420,6 +475,12 @@
                 stage: "4-BOSQICH · MULTI-PLATFORMA VA KLONLAR",
                 monthTitle: "4-oy · SI bilan turli formatdagi loyihalar qurish",
                 description: "Onlayn do'kon, telefon va kompyuter uchun dasturlar hamda mashhur Instagram va Telegram klonlarini yaratish.",
+                points: [
+                    "Onlayn do'kon ochish",
+                    "Telefon uchun ilova yasash",
+                    "Kompyuter uchun dastur yasash",
+                    "Instagram va Telegramga o'xshash ilova qurish"
+                ],
                 topics: [
                     "SI bilan online magazine qurish",
                     "SI bilan Telefon uchun dastur qurish",
@@ -433,6 +494,12 @@
                 stage: "5-BOSQICH · YAGONA EKOTIZIM",
                 monthTitle: "5-oy · SI bilan Ekosistema qurish",
                 description: "Katta hajmdagi yagona tizim: Admin panel, LMS, Moliya (Finance) va SuperAdmin modullaridan iborat Navi Clone loyihasi.",
+                points: [
+                    "O'quv markaz uchun tizim qurish",
+                    "Xodimlar uchun boshqaruv paneli",
+                    "Pul va to'lovlar hisobini yuritish",
+                    "Hammasini bitta tizimga birlashtirish"
+                ],
                 topics: [
                     "SI bilan Navi Clone'ni qurish (Admin panel, LMS, Finance, SuperAdmin)"
                 ]
@@ -442,6 +509,12 @@
                 stage: "6-BOSQICH · SI AGENTLAR VA PRODUCTION",
                 monthTitle: "6-oy · SI bilan eng foydali loyihalar",
                 description: "Mustaqil SI agentlar yasash, ularni Telegram bot va loyihalarga ulash, kiberxavfsizlik hamda dasturlarni real internetga chiqarish.",
+                points: [
+                    "O'zi mustaqil ishlaydigan yordamchi yasash",
+                    "Yordamchini Telegramga ulash",
+                    "Ishni xavfsiz saqlash qoidalari",
+                    "Dasturni internetga chiqarish"
+                ],
                 topics: [
                     "SI agent yasash",
                     "Telegram botda SI Agent ishlatish",
@@ -465,11 +538,15 @@
             card.className = 'card';
             const countLabel = month.topics.length === 1 ? "1 ta yirik loyiha" : `${month.topics.length} dars va loyiha`;
 
+            const pointsHtml = month.points
+                ? `<ul class="card-points">${month.points.map(p => `<li>${p}</li>`).join('')}</ul>`
+                : `<p class="card-desc">${month.description}</p>`;
+
             card.innerHTML = `
                 <div>
                     <div class="card-stage">${month.stage}</div>
                     <h3 class="card-title">${month.monthTitle}</h3>
-                    <p class="card-desc">${month.description}</p>
+                    ${pointsHtml}
                 </div>
                 <div class="card-footer">
                     <span>${countLabel} · tayyor ✓</span>
